@@ -1,0 +1,10 @@
+[Unit]
+Description=Some usefull text
+After=multi-user.target
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/mixail_bondarev/hse-super-bot/tg-bot.py
+WorkingDirectory=/home/mixail_bondarev/hse-super-bot
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
