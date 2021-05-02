@@ -14,5 +14,6 @@ You can use bot in telegram @hse_super_bot
 > export GOOGLE_CLOUD_PROGECT=yourproject //need customs settings
 > export GOOGLE_APPLICATION_CREDENTIALS=pathtofilecrendials
 > export CURRENCY_TOKEN=yourtoken
+> python3 tg-bot.py
 ```
 It'll be better if you just use @hse_super_bot and looks code)
