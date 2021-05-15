@@ -35,7 +35,7 @@ def check_rates(token_currency, project_id, r, bot, update):
     currency = detect_intent_texts(project_id, session_id, [update.message.text], 'ru-RU')
     if currency.intent.display_name == 'choose rate':
         rate = get_rates(token_currency, currency.fulfillment_text)
-        answer = f'1 рубль стоит {rate} {currency.fulfillment_text}'
+        answer = f'1 {currency.fulfillment_text} стоит {rate} RUB'
         bot.send_message(chat_id=chat_id, text=answer)
         bot.send_message(chat_id=chat_id, text='Посмотрим другую валюту?? Если нет - напишите "Нет")')
         return CHECK_RATES

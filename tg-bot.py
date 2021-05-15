@@ -45,19 +45,22 @@ def handle_new_question_request(questions, r, bot, update):
     number_q = random.randrange(0, len(questions) - 1)
     bot.send_message(chat_id=chat_id, text=questions[number_q]['question'])
     answer = questions[number_q]['answer']
-    r.set(f'tg-{chat_id}', answer)
+    if answer[-1] == '.':
+        r.set(f'tg-{chat_id}', answer[:-1])
+    else:
+        r.set(f'tg-{chat_id}', answer)
     return CHECK_ANSWER
 
 
 def handle_solution_attempt(r, bot, update):
     chat_id = update.message.chat_id
     answer = r.get(f'tg-{chat_id}')
-    if update.message.text == answer:
+    if update.message.text.upper() == answer.upper():
         message = 'Правильно! Поздравляю! Для следующего вопроса нажми «Новый вопрос»'
         bot.send_message(chat_id=chat_id, text=message)
         return CHOOSING_REQ
     else:
-        message = f'Неправильно… Попробуешь ещё раз? {answer}'
+        message = f'Неправильно… Попробуешь ещё раз?'
         bot.send_message(chat_id=chat_id, text=message)
         return CHECK_ANSWER
 
@@ -69,7 +72,10 @@ def handle_show_answer(questions, r, bot, update):
     number_q = random.randrange(0, len(questions) - 1)
     bot.send_message(chat_id=chat_id, text=questions[number_q]['question'])
     answer = questions[number_q]['answer']
-    r.set(f'tg-{chat_id}', answer)
+    if answer[-1] == '.':
+        r.set(f'tg-{chat_id}', answer[:-1])
+    else:
+        r.set(f'tg-{chat_id}', answer)
     return CHECK_ANSWER
 
 
